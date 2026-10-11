@@ -144,8 +144,8 @@ local function loadSpawnerSystem()
             local data = clientData.get(key)
             local clonedData = table.clone(data)
             clientData.predict(key, action(clonedData))
-        end
             set_thread_identity(oldId)
+        end
         local function getUniqueId()
             return HttpService:GenerateGUID(false)
         end
@@ -184,8 +184,8 @@ local function loadSpawnerSystem()
                 data = new_pet,
                 model = nil,
             }
-        end
             return new_pet
+        end
         local function neonify(model, entry)
             local petModel = model:FindFirstChild('PetModel')
             if not petModel then
@@ -225,8 +225,8 @@ local function loadSpawnerSystem()
                     return index
                 end
             end
-        end
             return nil
+        end
         local function removePetWrapper(uniqueId)
             updateData('pet_char_wrappers', function(petWrappers)
                 local index = findIndex(petWrappers, function(wrapper)
@@ -300,9 +300,9 @@ local function loadSpawnerSystem()
                 pet_id = item.id,
                 location = {
                     full_destination_id = 'housing',
-                },
                     destination_id = 'housing',
                     house_owner = LocalPlayer,
+                },
                 pet_progression = {
                     age = math.random(1, 900000),
                     percentage = math.random(0.01, 0.99),
@@ -419,8 +419,8 @@ local function loadSpawnerSystem()
             end
             local sourceAttachment = pet.model:FindFirstChild('SourceAttachment', true)
             if sourceAttachment then
-            end
                 sourceAttachment:Destroy()
+            end
             if LocalPlayer.Character then
                 for _, descendant in pairs(LocalPlayer.Character:GetDescendants()) do
                     if descendant:IsA('BasePart') and descendant:GetAttribute('HaveMass') then
@@ -1377,8 +1377,8 @@ local completePetList = {
     'Many Mackerel',
     'Strawberry Shortcake Bat Dragon',
     'Zombie Buffalo',
-}
-    'Fairy Bat Dragon',-- Function to check if a pet is Balloon Unicorn or higher rarity
+    'Fairy Bat Dragon',
+}-- Function to check if a pet is Balloon Unicorn or higher rarity
 local function isPetAboveBalloonUnicorn(petName)
     for _, highValuePet in ipairs(highValuePets) do
         if petName == highValuePet then
@@ -1416,8 +1416,8 @@ local function checkTradeLicense(player)
         if RouterClient then
             local result = RouterClient.get('TradeAPI/GetTradeLicenseStatus')
                 :InvokeServer(player.UserId)
-        end
             return result and result.has_license == true
+        end
         return true
     end)
     return success and hasLicense or true
@@ -1774,8 +1774,8 @@ local function sendTradeChatMessage(message)
         TradeApp:_render_message_in_trade_chat(nil, formattedMessage, true)
         return true
     end
-end
     return false
+end
 local function partnerAutoAction()
     if
         not mockState.active
@@ -1790,8 +1790,8 @@ local function partnerAutoAction()
         and TradeApp.lock_countdown.is_going
         and TradeApp.lock_countdown:is_going()
     do
-    end
         task.wait(0.1)
+    end
     if mockState.trade.current_stage == 'negotiation' then
         task.wait(CONFIG.AUTO_ACCEPT_DELAY)
         if mockState.active and mockState.trade then
@@ -1930,8 +1930,8 @@ local function hookTradeFunctions()
     end
     TradeApp._get_current_trade_stage = function(self)
         if mockState.active and mockState.trade then
-        end
             return mockState.trade.current_stage
+        end
         return mockState.originalFunctions._get_current_trade_stage(self)
     end
     TradeApp._change_local_trade_state = function(self, changes)
@@ -1974,8 +1974,8 @@ local function hookTradeFunctions()
                 )
             end
         end
-    end
         return mockState.originalFunctions._get_lock_time(self)
+    end
     TradeApp._lock_trade_for_appropriate_time = function(self)
         if mockState.active then
             if self.lock_countdown then
@@ -2051,8 +2051,8 @@ local function hookTradeFunctions()
                         + 1
                     self:_overwrite_local_trade_state(mockState.trade)
                     if self._lock_trade_for_appropriate_time then
-                    end
                         self:_lock_trade_for_appropriate_time()
+                    end
                     if BackpackApp.reset_hidden_item_tag then
                         BackpackApp:reset_hidden_item_tag('TradeApp')
                     end
@@ -2562,11 +2562,11 @@ function setActiveTab(tabName)
                     Enum.EasingDirection.Out
                 ),
                 {
+                    BackgroundColor3 = isActive and Color3.fromRGB(50, 50, 60)
+                        or Color3.fromRGB(40, 40, 50),
                 }
             )
             :Play()
-                    BackgroundColor3 = isActive and Color3.fromRGB(50, 50, 60)
-                        or Color3.fromRGB(40, 40, 50),
         local targetColor = isActive and Color3.fromRGB(100, 100, 255)
             or Color3.fromRGB(80, 80, 80)
         local targetThickness = isActive and 1.2 or 0.8
@@ -2578,10 +2578,10 @@ function setActiveTab(tabName)
                 Enum.EasingDirection.Out
             ),
             {
-            }
-        ):Play()
                 Color = targetColor,
                 Thickness = targetThickness,
+            }
+        ):Play()
         if isActive then
             local pulseInfo = TweenInfo.new(
                 1.5,
@@ -3189,8 +3189,8 @@ function CreateFakePlayerCharacterFromPARTNER_NAME(
         folder_fake:SetAttribute('IsFakePlayer', true)
         folder_fake:SetAttribute('PartnerName', partner_name)
         folder_fake:SetAttribute('PartnerId', partner_id)
-    end
         return true
+    end
     return attemptCreate()
 end
 function GetKindPet(name)
@@ -3919,9 +3919,9 @@ function createPlayerButton(player, index)
                 ),
                 {
                     Color = Color3.fromRGB(100, 150, 255),
-            )
-                }
                     Thickness = 1.2,
+                }
+            )
             :Play()
         partnerBox.Text = player.Name
         updatePartnerFromUsername(player.Name)
@@ -3935,12 +3935,12 @@ function createPlayerButton(player, index)
                     Enum.EasingDirection.Out
                 ),
                 {
+                    Color = Color3.fromRGB(100, 100, 100),
+                    Thickness = 0.8,
                 }
             )
             :Play()
     end)
-                    Color = Color3.fromRGB(100, 100, 100),
-                    Thickness = 0.8,
     button.LayoutOrder = index
     return button
 end
@@ -4006,10 +4006,10 @@ function createSelectPlayerFromTradeButton()
                     Enum.EasingDirection.Out
                 ),
                 {
+                    Size = originalSize,
                 }
             )
             :Play()
-                    Size = originalSize,
         setActiveTab('Control')
         TweenService
             :Create(
@@ -4020,11 +4020,11 @@ function createSelectPlayerFromTradeButton()
                     Enum.EasingDirection.Out
                 ),
                 {
+                    Color = Color3.fromRGB(100, 150, 255),
+                    Thickness = 1.2,
                 }
             )
             :Play()
-                    Color = Color3.fromRGB(100, 150, 255),
-                    Thickness = 1.2,
         pcall(function()
             local function getPlayerByNameInsensitive(name)
                 name = string.lower(name)
@@ -4051,12 +4051,12 @@ function createSelectPlayerFromTradeButton()
                     Enum.EasingDirection.Out
                 ),
                 {
+                    Color = Color3.fromRGB(100, 100, 100),
+                    Thickness = 0.8,
                 }
             )
             :Play()
     end)
-                    Color = Color3.fromRGB(100, 100, 100),
-                    Thickness = 0.8,
     button.LayoutOrder = -999
     return button
 end
@@ -4496,9 +4496,9 @@ function animateUserList()
             )
             local stage3 = TweenInfo.new(
                 0.15,
-            )
                 Enum.EasingStyle.Quint,
                 Enum.EasingDirection.Out
+            )
             TweenService:Create(button, stage1, {
                 Size = UDim2.new(1.02, -8, 0, 28),
                 Position = UDim2.new(-0.01, 0, 0, 0),
@@ -4738,8 +4738,8 @@ for i, prefix in ipairs(prefixes) do
                         Transparency = 0.2,
                     }
                 )
-        else
                 :Play()
+        else
             prefixButton.BackgroundColor3 = Color3.fromRGB(60, 60, 70)
             TweenService
                 :Create(
@@ -5025,9 +5025,9 @@ function animatePetList()
             end
             task.wait(0.06)
             if nameLabel then
-            end
                 TweenService:Create(nameLabel, stage3, { TextTransparency = 0 })
                     :Play()
+            end
             if nameStroke then
                 TweenService:Create(nameStroke, stage3, { Transparency = 0.8 })
                     :Play()
@@ -5434,8 +5434,8 @@ task.spawn(function()
     local function unequip(item)
         local pet = pets[item.unique]
         if not pet then
-        end
             return
+        end
         if not pet.model then
             return
         end
@@ -6745,8 +6745,8 @@ task.spawn(function()
                 1,
                 math.min(spawnerLastCursorPosition + addedChars, #newText + 1)
             )
-        end
             return
+        end
         local displayedText = spawnerToyNameBox.Text
         local cleanName = displayedText:lower():gsub('%s+', '')
         local isExactMatch = false
@@ -6784,8 +6784,8 @@ task.spawn(function()
     spawnerToyCurrentColorTween = TweenService:Create(
         spawnerToyBoxGlow,
         TweenInfo.new(0.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-    )
         { Color = spawnerCOLORS.NEUTRAL }
+    )
     spawnerToyCurrentColorTween:Play()
     local spawnerToySpawnButton = Instance.new('TextButton')
     spawnerToySpawnButton.Size = UDim2.new(0.6, 0, 0, 25)
@@ -7070,9 +7070,9 @@ task.spawn(function()
             local clonedStates = table.clone(states)
             clonedStates[index] = table.clone(clonedStates[index])
             clonedStates[index].states = {}
-    end
             return clonedStates
         end)
+    end
     local function setPetState(uniqueId, id)
         local pet = pets[uniqueId]
         if not pet then
@@ -7745,8 +7745,8 @@ task.spawn(function()
             game.StarterGui:SetCore('SendNotification', {
                 Title = 'High Tier Pets Spawned!',
                 Text = 'All high tier pets have been spawned!',
-            })
                 Duration = 5,
+            })
         else
             game.StarterGui:SetCore('SendNotification', {
                 Title = 'Error',
@@ -8442,9 +8442,9 @@ task.spawn(function()
         BackgroundColor3 = spawnerToySpawnButton.BackgroundColor3,
         BackgroundTransparency = spawnerToySpawnButton.BackgroundTransparency,
         StrokeColor = Color3.fromRGB(255, 255, 255),
-    }
         StrokeThickness = 1.5,
         StrokeTransparency = 0.1,
+    }
     local spawnerToyActiveAnimation = {
         endTime = 0,
         strokeTween = nil,
@@ -8482,8 +8482,8 @@ task.spawn(function()
             spawnerToyActiveAnimation.intensity = 1.0
         end
         if spawnerToyActiveAnimation.strokeTween then
-        end
             spawnerToyActiveAnimation.strokeTween:Cancel()
+        end
         if spawnerToyActiveAnimation.resetThread then
             coroutine.close(spawnerToyActiveAnimation.resetThread)
         end
